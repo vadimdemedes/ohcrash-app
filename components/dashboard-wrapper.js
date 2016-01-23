@@ -17,7 +17,7 @@ const DashboardWrapper = React.createClass({
 	render: function () {
 		return <div className="sm-container px2 sm-px0">
 			<Link to="/">
-				<img src="/images/logo.svg" className="w200 mt4 block block-center" />
+				<img src="/images/logo.svg" className="w100 mt2 block block-center" />
 			</Link>
 
 			<div className="mt4 py3">
