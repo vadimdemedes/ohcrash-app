@@ -34,10 +34,13 @@ const ProjectPage = React.createClass({
 			return <div />;
 		}
 
+		let [ user, name ] = project.fullName.split('/');
+
 		return <DashboardWrapper>
 			<div className="clearfix">
 				<h3 className="mt0 left">
-					{ project.fullName }
+					<span className="grey">{ user } / </span>
+					{ name }
 				</h3>
 
 				<div className="right">
@@ -92,7 +95,7 @@ const ProjectPage = React.createClass({
 
 	renderCodeExample: function () {
 		let project = this.getProject();
-		
+
 		return <pre className="bg-black white p2 rounded">
 			<code>
 				<span className="blue">require</span>
