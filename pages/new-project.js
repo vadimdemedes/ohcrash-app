@@ -10,6 +10,7 @@ import React from 'react';
 
 import { loadRepositories } from '../lib/github';
 import DashboardWrapper from '../components/dashboard-wrapper';
+import RepositoryList from '../components/repository-list';
 import Actions from '../actions';
 import Button from '../components/button';
 import Link from '../components/link';
@@ -23,19 +24,19 @@ const NewProjectPage = React.createClass({
 	getInitialState: function () {
 		return {
 			query: null,
-			repos: []
+			repositories: []
 		};
 	},
 
 	componentWillMount: function () {
-		loadRepositories(this.props.user.githubAccessToken, repos => {
-			repos = repos.filter(repo => {
+		loadRepositories(this.props.user.githubAccessToken, repositories => {
+			repositories = repositories.filter(repository => {
 				return this.props.projects.filter(project => {
-					return repo.full_name === project.fullName;
+					return repository.full_name === project.fullName;
 				}).length === 0;
 			});
 
-			this.setState({ repos });
+			this.setState({ repositories });
 		});
 	},
 
@@ -44,21 +45,13 @@ const NewProjectPage = React.createClass({
 	},
 
 	render: function () {
-		let repos = this.state.repos;
+		let repositories = this.state.repositories;
 
 		if (this.state.query) {
-			repos = repos.filter(repo => {
-				return repo.full_name.indexOf(this.state.query) >= 0;
+			repositories = repositories.filter(repository => {
+				return repository.full_name.indexOf(this.state.query) >= 0;
 			});
 		}
-
-		let repositories = repos.map(repo => {
-			return <li key={ repo.id }>
-				<a href="#" onClick={ this.chooseRepo.bind(this, repo) }>
-					{ repo.full_name }
-				</a>
-			</li>;
-		});
 
 		return <DashboardWrapper>
 			<div className="clearfix">
@@ -80,18 +73,17 @@ const NewProjectPage = React.createClass({
 					value={ this.state.query }
 					type="text"
 					autoFocus={ true }
-					onChange={ this.setQuery }/>
+					onChange={ this.setQuery } />
 			</div>
 
-			<ul className="mt3 list-reset">
-				{ repositories }
-			</ul>
+			<RepositoryList
+				repositories={ repositories }
+				className="mt3"
+				onClick={ this.selectRepository } />
 		</DashboardWrapper>
 	},
 
-	chooseRepo: function (repo, e) {
-		e.preventDefault();
-
+	selectRepository: function (repo) {
 		this.props.actions.createProject({
 			githubId: repo.id,
 			fullName: repo.full_name,
