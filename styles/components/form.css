@@ -1,0 +1,8 @@
+.field {
+	/* TODO: transform to calc() */
+	padding: .9rem 1rem;
+	border: 1px solid #eee;
+	width: 100%;
+	box-sizing: border-box;
+	font-size: 1.8rem;
+}

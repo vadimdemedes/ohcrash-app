@@ -84,10 +84,7 @@ const Dispatcher = React.createClass({
 		router.on('route:homepage', () => this.transition(HomePage));
 		router.on('route:projects', () => this.transition(ProjectsPage));
 		router.on('route:newProject', () => this.transition(NewProjectPage));
-		router.on('route:project', project => {
-			this.transition(ProjectPage, { project });
-		});
-
+		router.on('route:project', project => this.transition(ProjectPage, { project }));
 		router.run();
 	},
 
