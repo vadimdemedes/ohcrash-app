@@ -56,7 +56,11 @@ const ProjectPage = React.createClass({
 				<li>
 					<h3>1. Install OhCrash client library</h3>
 					<p>
-						OhCrash library works in both Node.js and browser environments.
+						<a href="https://github.com/vdemedes/ohcrash">OhCrash library</a> works in both Node.js and browser environments.
+					</p>
+					<p>
+						It is open-source and available on <a href="https://github.com/vdemedes/ohcrash">GitHub</a>, where you can also read more
+						about additional features, like manual error reporting and GitHub labels.
 					</p>
 
 					{ this.renderInstallExample() }
