@@ -11,6 +11,7 @@ import React from 'react';
 
 import DashboardWrapper from '../components/dashboard-wrapper';
 import { projectPath } from '../helpers/urls';
+import ProjectList from '../components/project-list';
 import Actions from '../actions';
 import Link from '../components/link';
 
@@ -50,20 +51,7 @@ const ProjectsPage = React.createClass({
 			return this.renderTutorial();
 		}
 
-		let projects = this.props.projects.map(project => {
-			let lastError = 'No errors reported yet';
-
-			if (project.lastErrorAt) {
-				lastError = 'Last error reported ' + moment(new Date(project.lastErrorAt)).fromNow();
-			}
-
-			return <li key={ project.githubId } className="mb2">
-				<Link to={ projectPath(project.name) }>{ project.fullName }</Link>
-				<span className="block grey">{ lastError }</span>
-			</li>;
-		});
-
-		return <ul className="list-reset mt3">{ projects }</ul>;
+		return <ProjectList projects={ this.props.projects } />;
 	},
 
 	renderTutorial: function () {
