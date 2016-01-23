@@ -1,0 +1,34 @@
+.sm-container {
+  max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.underline {
+	border-bottom: 1px solid;
+
+	/* override basscss default */
+	text-decoration: none !important;
+}
+
+.block-center {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.visible { opacity: 1 }
+.hidden { opacity: 0 }
+
+.sm-rounded { border-radius: 0 }
+
+@media (--breakpoint-sm) {
+	.sm-rounded { border-radius: var(--border-radius) }
+}
+
+.w300 { width: 300px }
+.w170 { width: 170px }
+.w160 { width: 160px }
+.w140 { width: 140px }
+.w200 { width: 200px }
+
+.pr0 { padding-right: 0 }

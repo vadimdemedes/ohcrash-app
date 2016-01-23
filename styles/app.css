@@ -1,0 +1,96 @@
+@import 'basscss-defaults';
+@import 'basscss-base-reset';
+@import 'basscss-base-typography';
+@import 'basscss-align';
+@import 'basscss-grid';
+@import 'basscss-layout';
+@import 'basscss-margin';
+@import 'basscss-padding';
+@import 'basscss-positions';
+@import 'basscss-typography';
+@import 'basscss-type-scale';
+@import 'basscss-responsive-states';
+@import 'basscss-responsive-white-space';
+@import 'basscss-borders';
+@import 'basscss-btn';
+@import 'basscss-btn-primary';
+@import 'basscss-btn-outline';
+
+:root {
+	--font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, sans-serif;
+	--body-font-size: 1.8em;
+	--h1: 2.4rem;
+	--h2: 2.2rem;
+	--h3: 2rem;
+	--h4: 1.8rem;
+	--h5: 1.6rem;
+	--h6: 1.4rem;
+	--container-width: 90rem;
+	--button-background-color: transparent;
+	--button-color: #fff;
+	--button-padding-y: 1rem;
+	--black: #333;
+	--blue: #5daef2;
+	--red: #e54331;
+	--white: #fff;
+	--grey: #abb2c0;
+	--green: #a4da93;
+}
+
+html {
+	-ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+	font-size: 62.5%;
+}
+
+body {
+	color: var(--black);
+	text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+	padding-bottom: var(--space-4);
+}
+
+a {
+	text-decoration: none;
+	color: var(--red);
+}
+
+a:not(.btn):hover {
+	border-bottom: 1px solid;
+}
+
+@import './components/button';
+@import './colors';
+@import './utils';
+
+.field {
+	/* TODO: transform to calc() */
+	padding: .9rem 1rem;
+	border: 1px solid #eee;
+	width: 100%;
+	box-sizing: border-box;
+	font-size: 1.8rem;
+}
+
+.top-navigation a {
+	transition: color 100ms cubic-bezier(0.55, 0.09, 0.68, 0.53);
+}
+
+@media (--breakpoint-md) {
+	.projects .top-navigation a { color: var(--grey) }
+	.projects .top-navigation:hover a { color: var(--red) }
+}
+
+.sticker-pow { bottom: -95px }
+.sticker-omg { bottom: -40px }
+.sticker-oops { bottom: -70px }
+
+.sticker-right { right: -50px }
+.sticker-left { left: -50px }
+
+.issue-screenshot { max-width: 450px }
+
+@media (max-width: 450px) {
+	.issue-screenshot { max-width: 100% }
+}

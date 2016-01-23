@@ -1,0 +1,9 @@
+.btn img {
+	width: 20px;
+  vertical-align: sub;
+	margin-right: 10px;
+}
+
+.btn-lg {
+	padding: var(--space-2) var(--space-3);
+}
