@@ -6,6 +6,7 @@
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import startsWith from 'starts-with-any';
 import React from 'react';
 
 import { loadRepositories } from '../lib/github';
@@ -46,11 +47,19 @@ const NewProjectPage = React.createClass({
 
 	render: function () {
 		let repositories = this.state.repositories;
+		let query = this.state.query;
 
-		if (this.state.query) {
-			repositories = repositories.filter(repository => {
-				return repository.full_name.indexOf(this.state.query) >= 0;
-			});
+		if (query) {
+			repositories = repositories
+				.filter(repository => {
+					return repository.full_name.indexOf(query) >= 0;
+				})
+				.sort((a, b) => {
+					return startsWith(b.name, query) - startsWith(a.name, query);
+				})
+				.sort((a, b) => {
+					return a.fork - b.fork;
+				});
 		}
 
 		return <DashboardWrapper>

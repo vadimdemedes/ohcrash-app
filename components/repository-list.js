@@ -31,10 +31,18 @@ const RepositoryList = React.createClass({
 	},
 
 	renderItem: function (repository) {
+		let note;
+
+		if (repository.fork) {
+			note = <span className="grey ml1">fork</span>;
+		}
+
 		return <li key={ repository.id }>
 			<a href="#" onClick={ this.selectRepository.bind(this, repository) }>
 				{ repository.full_name }
 			</a>
+
+			{ note }
 		</li>;
 	},
 
