@@ -6,6 +6,7 @@
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import React from 'react';
 
 import DashboardWrapper from '../components/dashboard-wrapper';
@@ -50,9 +51,15 @@ const ProjectsPage = React.createClass({
 		}
 
 		let projects = this.props.projects.map(project => {
+			let lastError = 'No errors reported yet';
+
+			if (project.lastErrorAt) {
+				lastError = 'Last error reported ' + moment(new Date(project.lastErrorAt)).fromNow();
+			}
+
 			return <li key={ project.githubId } className="mb2">
 				<Link to={ projectPath(project.name) }>{ project.fullName }</Link>
-				<span className="block grey">Last error reported 4 days ago</span>
+				<span className="block grey">{ lastError }</span>
 			</li>;
 		});
 
