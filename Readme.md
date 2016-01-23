@@ -43,6 +43,44 @@ This repository contains a front-end web application, that you use over at https
 Feel free to contribute ideas/feedback/changes or improvements.
 
 
+## Getting started
+
+Below are the key commands you need to use to bundle & test this project.
+
+Build both scripts and stylesheets:
+
+```
+$ npm run build
+```
+
+Build only scripts:
+
+```
+$ npm run scripts
+```
+
+Build only stylesheets:
+
+```
+$ npm run styles
+```
+
+Start a server:
+
+```
+$ npm start
+```
+
+Code style checking with XO is temporarily disabled.
+
+
+## Tests
+
+```
+$ npm test
+```
+
+
 ## License
 
 MIT © [Vadim Demedes](https://github.com/vdemedes)
