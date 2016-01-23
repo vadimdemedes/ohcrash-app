@@ -38,7 +38,7 @@ const ProjectPage = React.createClass({
 
 		return <DashboardWrapper>
 			<div className="clearfix">
-				<h3 className="mt0 left">
+				<h3 className="mt0 py1 left">
 					<span className="grey">{ user } / </span>
 					{ name }
 				</h3>
