@@ -20,24 +20,18 @@ import Link from '../components/link';
 
 const ProjectPage = React.createClass({
 	componentDidMount: function () {
-		let project = this.props.projects.filter(project => {
-			return project.name === this.props.params.project;
-		});
+		let project = this.getProject();
 
-		if (project[0]) {
-			document.title = project[0].fullName + ' - OhCrash';
+		if (project) {
+			document.title = project.fullName + ' - OhCrash';
 		}
 	},
 
 	render: function () {
-		let project = this.props.projects.filter(project => {
-			return project.name === this.props.params.project;
-		});
+		let project = this.getProject();
 
-		if (!project[0]) {
-			return <div></div>;
-		} else {
-			project = project[0];
+		if (!project) {
+			return <div />;
 		}
 
 		return <DashboardWrapper>
@@ -97,6 +91,8 @@ const ProjectPage = React.createClass({
 	},
 
 	renderCodeExample: function () {
+		let project = this.getProject();
+		
 		return <pre className="bg-black white p2 rounded">
 			<code>
 				<span className="blue">require</span>
@@ -107,6 +103,18 @@ const ProjectPage = React.createClass({
 				<span className="grey">);</span>
 			</code>
 		</pre>;
+	},
+
+	getProject: function () {
+		let projects = this.props.projects.filter(project => {
+			return project.name === this.props.params.project;
+		});
+
+		if (projects.length === 0) {
+			return null;
+		}
+
+		return projects[0];
 	}
 });
 
