@@ -19,7 +19,7 @@ import Link from '../components/link';
  */
 
 const ProjectPage = React.createClass({
-	componentDidMount: function () {
+	componentDidUpdate: function () {
 		let project = this.getProject();
 
 		if (project) {
