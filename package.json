@@ -1,9 +1,9 @@
 {
   "scripts": {
-		"start": "hiruko public",
+    "start": "hiruko public",
     "build": "npm run scripts && npm run styles",
     "scripts": "browserify -t babelify -t [ envify purge ] app.js > public/app.js",
-    "styles": "node stylesheets styles/app.css > public/app.css",
+    "styles": "cssor -t rework-npm -t myth -b styles styles/app.css > public/app.css",
     "test": "xo; ava"
   },
   "devDependencies": {
@@ -12,16 +12,15 @@
     "babel-preset-react": "^6.3.13",
     "babelify": "^7.2.0",
     "browserify": "^12.0.1",
+    "cssor": "^1.0.0",
     "envify": "vdemedes/envify#env-files",
     "eslint": "^1.10.3",
     "eslint-config-vdemedes": "^1.0.0",
     "eslint-config-xo-react": "^0.3.0",
     "eslint-plugin-react": "^3.15.0",
     "hiruko": "^1.0.0",
-    "less": "^2.5.3",
     "myth": "^1.5.0",
-    "rework": "^1.0.1",
-    "rework-npm": "^1.0.0",
+		"rework-npm": "^1.0.0",
     "xo": "^0.12.1"
   },
   "dependencies": {
