@@ -74,7 +74,13 @@ const NewProjectPage = React.createClass({
 			</p>
 
 			<div className="mt2">
-				<input type="text" className="field" placeholder="Enter a repository name" value={ this.state.query } onChange={ this.setQuery }/>
+				<input
+					placeholder="Enter a repository name"
+					className="field"
+					value={ this.state.query }
+					type="text"
+					autoFocus={ true }
+					onChange={ this.setQuery }/>
 			</div>
 
 			<ul className="mt3 list-reset">
