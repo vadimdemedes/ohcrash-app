@@ -7,7 +7,7 @@
 import * as ActionTypes from '../constants/action-types';
 import { transitionTo } from './transition';
 import { projectPath } from '../helpers/urls';
-import serialize from '../util/serialize';
+import serialize from '../helpers/serialize';
 import Project from '../models/project';
 
 
