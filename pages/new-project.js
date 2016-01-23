@@ -29,6 +29,12 @@ const NewProjectPage = React.createClass({
 
 	componentWillMount: function () {
 		loadRepositories(this.props.user.githubAccessToken, repos => {
+			repos = repos.filter(repo => {
+				return this.props.projects.filter(project => {
+					return repo.full_name === project.fullName;
+				}).length === 0;
+			});
+
 			this.setState({ repos });
 		});
 	},
@@ -101,6 +107,7 @@ const NewProjectPage = React.createClass({
 
 function mapStateToProps (state) {
 	return {
+		projects: state.projects,
 		user: state.user
 	};
 }
