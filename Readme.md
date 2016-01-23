@@ -37,6 +37,12 @@ As soon as error is caught, a new issue on GitHub will be opened will all relate
 <img width="515" src="media/issue.png">
 
 
+## What is this repository for?
+
+This repository contains a front-end web application, that you use over at https://ohcrash.com.
+Feel free to contribute ideas/feedback/changes or improvements.
+
+
 ## License
 
 MIT © [Vadim Demedes](https://github.com/vdemedes)
