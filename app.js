@@ -26,7 +26,9 @@ import App from './containers/app';
 import NewProjectPage from './pages/new-project';
 import ProjectsPage from './pages/projects';
 import ProjectPage from './pages/project';
-import HomePage from './pages/homepage';
+import HomePage from './pages/home';
+import DocsPage from './pages/docs';
+import TourPage from './pages/tour';
 
 import Project from './models/project';
 import User from './models/user';
@@ -81,10 +83,12 @@ const Dispatcher = React.createClass({
 	},
 
 	componentWillMount: function () {
-		router.on('route:homepage', () => this.transition(HomePage));
+		router.on('route:home', () => this.transition(HomePage));
 		router.on('route:projects', () => this.transition(ProjectsPage));
 		router.on('route:newProject', () => this.transition(NewProjectPage));
 		router.on('route:project', project => this.transition(ProjectPage, { project }));
+		router.on('route:docs', () => this.transition(DocsPage));
+		router.on('route:tour', () => this.transition(TourPage));
 		router.run();
 	},
 

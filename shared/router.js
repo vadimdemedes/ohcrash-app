@@ -13,11 +13,13 @@ import Router from '../lib/router';
 
 const router = new Router({
 	routes: {
-		'': 'homepage',
+		'': 'home',
 		'projects': 'projects',
 		'projects/new': 'newProject',
 		'projects/:name': 'project',
-		'settings': 'settings'
+		'settings': 'settings',
+		'docs': 'docs',
+		'tour': 'tour'
 	}
 });
 

@@ -9,7 +9,6 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import React from 'react';
 
-import DashboardWrapper from '../components/dashboard-wrapper';
 import { projectPath } from '../helpers/urls';
 import ProjectList from '../components/project-list';
 import Actions from '../actions';
@@ -26,24 +25,7 @@ const ProjectsPage = React.createClass({
 	},
 
 	render: function () {
-		return <DashboardWrapper>
-			{ this.renderNav() }
-			{ this.renderContent() }
-		</DashboardWrapper>;
-	},
-
-	renderNav: function () {
-		if (this.props.projects.length === 0) {
-			return;
-		}
-
-		return <div className="clearfix">
-			<h3 className="mt0 left">Your projects</h3>
-
-			<div className="right">
-				<Link to="/projects/new" className="btn btn-primary bg-red white">New project</Link>
-			</div>
-		</div>;
+		return this.renderContent();
 	},
 
 	renderContent: function () {
@@ -51,18 +33,24 @@ const ProjectsPage = React.createClass({
 			return this.renderTutorial();
 		}
 
-		return <ProjectList projects={ this.props.projects } />;
+		return <div className="mt4">
+			<h1 className="center">Your Projects</h1>
+
+			<div className="mt4">
+				<ProjectList projects={ this.props.projects } />
+			</div>
+		</div>;
 	},
 
 	renderTutorial: function () {
-		return <div className="center">
-			<h3>Your projects will be shown here</h3>
+		return <div className="center mt4">
+			<img src="/images/no-apps.png" className="w200 weather-demo" />
 
-			<p>
-				Create your first project by clicking on "New project" button below.
+			<p className="mt3">
+				You haven't created any projects yet.<br/>But no worries, you can try creating one now!
 			</p>
 
-			<Link to="/projects/new" className="btn btn-primary bg-red white">New project</Link>
+			<Link to="/projects/new" className="primary-btn">New project</Link>
 		</div>;
 	}
 });

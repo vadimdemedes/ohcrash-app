@@ -10,10 +10,8 @@ import startsWith from 'starts-with-any';
 import React from 'react';
 
 import { loadRepositories } from '../lib/github';
-import DashboardWrapper from '../components/dashboard-wrapper';
 import RepositoryList from '../components/repository-list';
 import Actions from '../actions';
-import Button from '../components/button';
 import Link from '../components/link';
 
 
@@ -62,18 +60,18 @@ const NewProjectPage = React.createClass({
 				});
 		}
 
-		return <DashboardWrapper>
-			<div className="clearfix">
-				<h3 className="mt0 left">New project</h3>
+		return <div className="mt4">
+			<h1 className="center">Add Project</h1>
 
-				<div className="right">
-					<Link to="/projects" className="btn red pr0">Cancel</Link>
+			<div className="clearfix mt4">
+				<p className="sm-col sm-col-10 m0">
+					Select a repository, where OhCrash should open issues for reported errors.
+				</p>
+
+				<div className="sm-col sm-col-2 right-align">
+					<Link to="/projects" className="red">Cancel</Link>
 				</div>
 			</div>
-
-			<p className="mt3">
-				Select a repository, where OhCrash should open issues for reported errors.
-			</p>
 
 			<div className="mt2">
 				<input
@@ -85,11 +83,12 @@ const NewProjectPage = React.createClass({
 					onChange={ this.setQuery } />
 			</div>
 
-			<RepositoryList
+			<div className="mt2">
+				<RepositoryList
 				repositories={ repositories }
-				className="mt3"
 				onClick={ this.selectRepository } />
-		</DashboardWrapper>
+			</div>
+		</div>
 	},
 
 	selectRepository: function (repo) {

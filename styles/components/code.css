@@ -1,0 +1,48 @@
+pre {
+	extend: .m0;
+
+	font-family: var(--code-font-family);
+	font-size: var(--h6);
+	white-space: nowrap;
+}
+
+code {
+	padding: .1rem .6rem .3rem;
+
+	border-radius: 2px;
+	background: var(--light-blue);
+	color: var(--dark-blue);
+	font-size: var(--h6);
+}
+
+pre code {
+	padding: 0;
+	border-radius: 0;
+	background: none;
+	color: inherit;
+	font-size: inherit;
+}
+
+.highlight {
+	extend: .p2;
+
+	border: 1px solid var(--blue);
+	border-radius: 2px;
+	background: var(--light-blue);
+}
+
+.highlight pre {
+	white-space: pre-wrap;
+}
+
+/* comment */
+.c1, .o { color: var(--grey); }
+
+/* keyword */
+.kd { color: #2E79BA; }
+
+/* key and parenthesis */
+.nx, .p { color: var(--dark-blue); }
+
+/* string and boolean */
+.s1, .kc { color: var(--red); }

@@ -1,35 +1,22 @@
-.sm-container {
-  max-width: 60rem;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .underline {
-	border-bottom: 1px solid;
+	border-bottom: 1px inset;
 
 	/* override basscss default */
 	text-decoration: none !important;
 }
 
-.block-center {
-	margin-left: auto;
-	margin-right: auto;
-}
+/* Widths */
 
-.visible { opacity: 1 }
-.hidden { opacity: 0 }
+.w300 { width: 300px; }
+.w400 { max-width: 400px; }
+.w200 { width: 200px; }
+.w128 { width: 128px; }
+.w28 { width: 28px; }
 
-.sm-rounded { border-radius: 0 }
+/* Custom Margins */
 
-@media (--breakpoint-sm) {
-	.sm-rounded { border-radius: var(--border-radius) }
-}
-
-.w300 { width: 300px }
-.w170 { width: 170px }
-.w160 { width: 160px }
-.w140 { width: 140px }
-.w100 { width: 100px }
-.w200 { width: 200px }
-
-.pr0 { padding-right: 0 }
+.mt6 { margin-top: 6rem; }
+.mb6 { margin-bottom: 6rem; }
+.mt8 { margin-top: 8rem; }
+.mt10 { margin-top: 10rem; }
+.mb04 { margin-bottom: .4rem; }

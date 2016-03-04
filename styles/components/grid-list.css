@@ -1,0 +1,15 @@
+.grid-list-item {
+	background: #FAFCFF;
+	color: #8DC6FF;
+	border: 1px solid var(--light-blue);
+	border-radius: 2px;
+	height: 60px;
+}
+
+.grid-list-item:hover {
+	border: 1px solid #8DC6FF;
+}
+
+.grid-list-item.is-action {
+	background: #FDFEFF;
+}

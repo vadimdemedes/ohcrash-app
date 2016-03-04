@@ -1,0 +1,24 @@
+.window {
+	border-radius: 2px;
+	border: 1px solid var(--blue);
+	color: #86bdf7;
+}
+
+.window-header {
+	padding: .2rem .6rem .2rem;
+	border-bottom: 1px solid var(--blue);
+}
+
+.window-header span {
+	extend: .inline-block;
+
+	margin-right: .2rem;
+	width: 8px;
+	height: 8px;
+	border: 1px solid var(--blue);
+	border-radius: 16px;
+}
+
+.window-body {
+	extend: .p2;
+}

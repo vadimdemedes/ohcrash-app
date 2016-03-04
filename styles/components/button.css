@@ -1,9 +1,19 @@
-.btn img {
-	width: 20px;
-  vertical-align: sub;
-	margin-right: 10px;
+.btn {
+	border-radius: 20px;
+	padding: .6rem 1.6rem;
 }
 
-.btn-lg {
-	padding: var(--space-2) var(--space-3);
+.btn--outline {
+	border: 1px solid;
+}
+
+.btn-icon {
+	height: 20px;
+  position: relative;
+  top: 3px;
+  left: -6px;
+}
+
+.primary-btn {
+	extend: .btn, .bg-red, .white;
 }

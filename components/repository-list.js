@@ -6,44 +6,38 @@
 
 import React from 'react';
 
+import Link from './link';
+
 
 /**
  * Repository list component
- *
- * Used in "New Project" page
  */
 
 const RepositoryList = React.createClass({
 	render: function () {
-		let classes = [
-			'list-reset'
-		];
-
-		if (this.props.className) {
-			classes.push(this.props.className);
+		if (this.props.repositories.length === 0) {
+			return null;
 		}
 
-		let repositories = this.props.repositories.map(this.renderItem);
+		let groups = groupBy(this.props.repositories, 3);
 
-		return <ul className={ classes.join(' ') }>
-			{ repositories }
-		</ul>;
-	},
+		let rows = groups.map(repositories => {
+			return repositories.map(repository => {
+				return <div key={ repository.id } className="p2 md-col md-col-4">
+					<a href="#" onClick={ this.selectRepository.bind(this, repository) }>
+						<div className="grid-list-item p2">
+							{ repository.full_name }
+						</div>
+					</a>
+				</div>;
+			});
+		});
 
-	renderItem: function (repository) {
-		let note;
+		rows = rows.map((row, index) => {
+			return <div key={ index } className="clearfix mxn2">{ row }</div>;
+		});
 
-		if (repository.fork) {
-			note = <span className="grey ml1">fork</span>;
-		}
-
-		return <li key={ repository.id }>
-			<a href="#" onClick={ this.selectRepository.bind(this, repository) }>
-				{ repository.full_name }
-			</a>
-
-			{ note }
-		</li>;
+		return <div>{ rows }</div>;
 	},
 
 	selectRepository: function (repository, e) {
@@ -54,6 +48,34 @@ const RepositoryList = React.createClass({
 		}
 	}
 });
+
+
+/**
+ * Helpers
+ */
+
+function groupBy (arr, n) {
+	let newArr = [];
+	let currArr = [];
+
+	let k = 0;
+
+	if (arr.length < n) {
+		return [arr];
+	}
+
+	for (let i = 0; i < arr.length; i++) {
+		currArr.push(arr[i]);
+
+		if ((k++) + 1 === n) {
+			k = 0;
+			newArr.push(currArr);
+			currArr = [];
+		}
+	}
+
+	return newArr;
+}
 
 
 /**

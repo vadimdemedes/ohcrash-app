@@ -6,8 +6,7 @@
 
 import React from 'react';
 
-import { projectsPath } from '../helpers/urls';
-import Button from './button';
+import router from '../shared/router';
 import Link from './link';
 
 
@@ -15,157 +14,162 @@ import Link from './link';
  * Top navigation component
  */
 
-// TODO: Make it clean
 const TopNavigation = React.createClass({
-	render: function () {
-		return <div>
-			{ this.renderDesktopNav() }
-			{ this.renderMobileNav() }
-		</div>;
+	getInitialState: function () {
+		return {
+			currentRoute: null
+		};
 	},
 
-	renderDesktopNav: function () {
-		let navProps = {
-			className: [
-				'top-navigation',
-				'clearfix',
-				'sm-show',
-				'px2',
-				'md-px0',
-				'py2',
-				'md-py3'
-			].join(' ')
-		};
+	componentWillMount: function () {
+		this.setCurrentRoute();
+		router.on('route', this.setCurrentRoute);
+	},
 
-		let itemProps = {
-			className: 'inline-block mr2'
-		};
+	componentWillUnmount: function () {
+		router.off('route', this.setCurrentRoute);
+	},
 
-		if (!this.props.user) {
-			let buttonProps = {
-				type: 'outline',
-				color: 'red',
-				onClick: this.props.onLogIn
+	render: function () {
+		let leftMenu = this.renderLeftMenu();
+		let rightMenu = this.renderRightMenu();
+
+		return <nav className="mt4 clearfix">
+			{ leftMenu }
+			{ rightMenu }
+		</nav>;
+	},
+
+	menu: {
+		loggedOut: {
+			'/tour': 'Tour',
+			'/pricing': 'Pricing',
+			'https://github.com/vdemedes/ohcrash-app/issues/new': 'Support'
+		},
+
+		loggedIn: {
+			'/projects': 'Projects',
+			'https://github.com/vdemedes/ohcrash-app/issues/new': 'Support'
+		}
+	},
+
+	setCurrentRoute: function () {
+		this.setState({
+			currentRoute: router.currentRoute
+		});
+	},
+
+	isLoggedIn: function () {
+		return !!this.props.user;
+	},
+
+	isInDashboard: function () {
+		let dashboardRoutes = [
+			'newProject',
+			'projects',
+			'project'
+		];
+
+		return dashboardRoutes.indexOf(this.state.currentRoute) >= 0;
+	},
+
+	renderLeftMenu: function () {
+		let links = this.isLoggedIn() ? this.menu.loggedIn : this.menu.loggedOut;
+
+		let items = Object.keys(links).map(to => {
+			let label = links[to];
+			let link;
+
+			if (to[0] === '/') {
+				link = this.renderInternalLink(label, to);
+			} else {
+				link = this.renderRemoteLink(label, to);
 			}
 
-			return <nav { ...navProps }>
-				<ul className="list-reset left">
-					<li { ...itemProps }>
-						<Link to="/">Home</Link>
-					</li>
+			return link;
+		});
 
-					<li { ...itemProps }>
-						<a href="https://github.com/vdemedes/ohcrash#installation">Docs</a>
-					</li>
+		let logoItem = this.renderLogo();
+		items.unshift(logoItem);
 
-					<li { ...itemProps }>
-						<a href="https://github.com/vdemedes/ohcrash/issues/new">Support</a>
-					</li>
-				</ul>
-
-				<ul className="list-reset right">
-					<li>
-						<Button { ...buttonProps }>Log In with GitHub</Button>
-					</li>
-				</ul>
-			</nav>;
-		}
-
-		let buttonProps = {
-			type: 'outline',
-			color: 'red',
-			onClick: this.props.onLogOut
-		};
-
-		return <nav { ...navProps }>
-			<ul className="list-reset left">
-				<li { ...itemProps }>
-					<Link to="/">Home</Link>
-				</li>
-
-				<li { ...itemProps }>
-					<Link to={ projectsPath() }>Projects</Link>
-				</li>
-
-				<li { ...itemProps }>
-					<a href="https://github.com/vdemedes/ohcrash#installation">Docs</a>
-				</li>
-
-				<li { ...itemProps }>
-					<a href="https://github.com/vdemedes/ohcrash/issues/new">Support</a>
-				</li>
-			</ul>
-
-			<ul className="list-reset right">
-				<li>
-					<Button { ...buttonProps }>Log Out</Button>
-				</li>
-			</ul>
-		</nav>
+		return <ul className="left list-reset mt0">
+			{ items }
+		</ul>;
 	},
 
-	renderMobileNav: function () {
-		if (!this.props.user) {
-			let buttonProps = {
-				type: 'outline',
-				color: 'red',
-				onClick: this.props.onLogIn
-			};
+	renderRightMenu: function () {
+		let items = [];
 
-			return <nav className="sm-hide py3">
-				<div className="clearfix border-top py2">
-					<div className="col col-12 center">
-						<Link to="/">Home</Link>
-					</div>
-				</div>
+		let dashboardLink = this.renderInternalLink('Dashboard', '/projects');
+		let docsLink = this.renderInternalLink('Docs', '/docs');
+		let logInButton = this.renderLogInButton();
+		let logOutLink = this.renderLogOutLink();
 
-				<div className="clearfix border-top">
-					<div className="col col-6 border-right py2 center">
-						<a href="https://github.com/vdemedes/ohcrash#installation">Docs</a>
-					</div>
+		items.push(docsLink);
 
-					<div className="col col-6 py2 center">
-						<a href="https://github.com/vdemedes/ohcrash/issues/new">Support</a>
-					</div>
-				</div>
-
-				<div className="border-top py3 center">
-					<Button { ...buttonProps }>Log In with GitHub</Button>
-				</div>
-			</nav>;
+		if (this.isLoggedIn()) {
+			if (this.isInDashboard()) {
+				items.push(logOutLink);
+			} else {
+				items.push(dashboardLink);
+			}
+		} else {
+			items.push(logInButton);
 		}
 
-		let buttonProps = {
-			type: 'outline',
-			color: 'red',
-			onClick: this.props.onLogOut
-		};
+		return <ul className="right list-reset mt0">
+			{ items }
+		</ul>;
+	},
 
-		return <nav className="sm-hide py3">
-			<div className="clearfix border-top">
-				<div className="col col-6 border-right py2 center">
-					<Link to="/">Home</Link>
-				</div>
+	renderLogo: function () {
+		return <li key="logo" className="inline-block mr2">
+			<Link to="/" className="black logo-link">
+				OhCrash
+			</Link>
+		</li>;
+	},
 
-				<div className="col col-6 py2 center">
-					<Link to={ projectsPath() }>Projects</Link>
-				</div>
-			</div>
+	renderInternalLink: function (label, path) {
+		return <li key={ path } className="inline-block mr2">
+			<Link to={ path } className="grey">
+				{ label }
+			</Link>
+		</li>;
+	},
 
-			<div className="clearfix border-top">
-				<div className="col col-6 border-right py2 center">
-					<a href="https://github.com/vdemedes/ohcrash#installation">Docs</a>
-				</div>
+	renderRemoteLink: function (label, url) {
+		return <li key={ url } className="inline-block mr2">
+			<a href={ url } target="_blank" className="grey">
+				{ label }
+			</a>
+		</li>;
+	},
 
-				<div className="col col-6 py2 center">
-					<a href="https://github.com/vdemedes/ohcrash/issues/new">Support</a>
-				</div>
-			</div>
+	renderLogInButton: function () {
+		return <li key="login" className="inline-block">
+			<a href="#" onClick={ this.logIn } className="btn btn--outline red">
+				Sign In
+			</a>
+		</li>;
+	},
 
-			<div className="center border-top py3">
-				<Button { ...buttonProps }>Log Out</Button>
-			</div>
-		</nav>;
+	renderLogOutLink: function () {
+		return <li key="logout" className="inline-block">
+			<a href="#" onClick={ this.logOut } className="grey">
+				Log Out
+			</a>
+		</li>;
+	},
+
+	logIn: function (e) {
+		e.preventDefault();
+		this.props.onLogIn();
+	},
+
+	logOut: function (e) {
+		e.preventDefault();
+		this.props.onLogOut();
 	}
 });
 
