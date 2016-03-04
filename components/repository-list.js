@@ -6,6 +6,7 @@
 
 import React from 'react';
 
+import groupBy from '../helpers/group-by';
 import Link from './link';
 
 
@@ -48,34 +49,6 @@ const RepositoryList = React.createClass({
 		}
 	}
 });
-
-
-/**
- * Helpers
- */
-
-function groupBy (arr, n) {
-	let newArr = [];
-	let currArr = [];
-
-	let k = 0;
-
-	if (arr.length < n) {
-		return [arr];
-	}
-
-	for (let i = 0; i < arr.length; i++) {
-		currArr.push(arr[i]);
-
-		if ((k++) + 1 === n) {
-			k = 0;
-			newArr.push(currArr);
-			currArr = [];
-		}
-	}
-
-	return newArr;
-}
 
 
 /**

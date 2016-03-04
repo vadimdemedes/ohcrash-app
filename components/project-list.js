@@ -8,6 +8,7 @@ import moment from 'moment';
 import React from 'react';
 
 import { projectPath } from '../helpers/urls';
+import groupBy from '../helpers/group-by';
 import Link from './link';
 
 
@@ -80,29 +81,6 @@ function getLastError (project) {
 	}
 
 	return lastError;
-}
-
-function groupBy (arr, n) {
-	let newArr = [];
-	let currArr = [];
-
-	let k = 0;
-
-	if (arr.length < n) {
-		return [arr];
-	}
-
-	for (let i = 0; i < arr.length; i++) {
-		currArr.push(arr[i]);
-
-		if ((k++) + 1 === n) {
-			k = 0;
-			newArr.push(currArr);
-			currArr = [];
-		}
-	}
-
-	return newArr;
 }
 
 
