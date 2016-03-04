@@ -17,7 +17,7 @@ import Link from '../../components/link';
 const Header = React.createClass({
 	render: function () {
 		return <header className="clearfix mt10 mb4">
-			<div className="md-col md-col-6">
+			<div className="mt6 md-col md-col-6">
 				<h1>Fix errors before users even notice them.</h1>
 				<p>
 					OhCrash catches JavaScript errors and instantly opens nicely
