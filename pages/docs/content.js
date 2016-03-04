@@ -15,7 +15,7 @@ import content from '../text/docs.md';
 
 const Content = React.createClass({
 	render: function () {
-		return <div className="px4 md-col md-col-9" dangerouslySetInnerHTML={{ __html: content }} />;
+		return <div className="px4 pb4 md-col md-col-9" dangerouslySetInnerHTML={{ __html: content }} />;
 	}
 });
 
