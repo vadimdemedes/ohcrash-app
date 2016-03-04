@@ -43,7 +43,6 @@ const TopNavigation = React.createClass({
 	menu: {
 		loggedOut: {
 			'/tour': 'Tour',
-			'/pricing': 'Pricing',
 			'https://github.com/vdemedes/ohcrash-app/issues/new': 'Support'
 		},
 
