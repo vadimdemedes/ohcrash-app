@@ -8,9 +8,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React from 'react';
 
+import CallToAction from '../components/call-to-action';
 import HowItWorks from './home/how-it-works';
 import Actions from '../actions';
 import Header from './home/header';
+import Footer from '../components/footer';
 import Link from '../components/link';
 
 
@@ -25,8 +27,14 @@ const HomePage = React.createClass({
 
 	render: function () {
 		return <div>
-			<Header onLogIn={ this.props.actions.logIn } />
+			<Header onSignUp={ this.props.actions.logIn } />
 			<HowItWorks />
+
+			<div className="mt8">
+				<CallToAction onSignUp={ this.props.actions.logIn } />
+			</div>
+
+			<Footer />
 		</div>;
 	}
 });

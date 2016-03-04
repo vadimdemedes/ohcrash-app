@@ -7,6 +7,7 @@
 import React from 'react';
 
 import Content from './docs/content';
+import Footer from '../components/footer';
 import Link from '../components/link';
 import Nav from './docs/nav';
 
@@ -40,6 +41,7 @@ const DocsPage = React.createClass({
 		return <div className="mt4 clearfix">
 			<Nav ref="nav" sticky={ this.state.isSticky } />
 			<Content />
+			<Footer />
 		</div>;
 	},
 

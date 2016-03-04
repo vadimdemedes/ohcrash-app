@@ -6,6 +6,7 @@
 
 import React from 'react';
 
+import SignUpButton from '../../components/sign-up-button';
 import Link from '../../components/link';
 
 
@@ -23,10 +24,7 @@ const Header = React.createClass({
 					formed issues in the GitHub repository of your choice.
 				</p>
 
-				<a href="#" onClick={ this.logIn } className="primary-btn">
-					<img src="/images/github-icon.svg" className="btn-icon" /> Sign up with GitHub
-				</a>
-
+				<SignUpButton onClick={ this.props.onSignUp } />
 				<Link to="/tour" className="btn btn--outline blue ml1">Take a tour</Link>
 			</div>
 
@@ -36,11 +34,6 @@ const Header = React.createClass({
 				<span className="block center mt2 grey">Your app, when you <b className="underline">use</b> OhCrash.</span>
 			</div>
 		</header>;
-	},
-
-	logIn: function (e) {
-		e.preventDefault();
-		this.props.onLogIn();
 	}
 });
 

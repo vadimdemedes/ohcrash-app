@@ -8,8 +8,10 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React from 'react';
 
+import CallToAction from '../components/call-to-action';
 import HowItWorks from './tour/how-it-works';
 import Actions from '../actions';
+import Footer from '../components/footer';
 import Header from './tour/header';
 import Link from '../components/link';
 
@@ -27,6 +29,12 @@ const TourPage = React.createClass({
 		return <div>
 			<Header />
 			<HowItWorks />
+
+			<div className="mt8">
+				<CallToAction onSignUp={ this.props.actions.logIn } />
+			</div>
+
+			<Footer />
 		</div>;
 	}
 });
